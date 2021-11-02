@@ -1,0 +1,156 @@
+---
+title: "HMBxSTA"
+subtitle: "Special peer-to-peer consulting event"
+author: "HMB496/499, STA490"
+date: "Nov 5, 2021"
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 16:9
+---
+
+```{r setup, include=FALSE}
+# R options
+options(
+  htmltools.dir.version = FALSE, # for blogdown
+  show.signif.stars = FALSE,     # for regression output
+  warm = 1,
+  crayon.enabled = FALSE
+  )
+# Set dpi and height for images
+library(knitr)
+opts_chunk$set(fig.height = 2.65, dpi =300, warning=FALSE, message=FALSE) 
+# ggplot2 color palette with gray
+color_palette <- list(gray = "#999999", 
+                      salmon = "#E69F00", 
+                      lightblue = "#56B4E9", 
+                      green = "#009E73", 
+                      yellow = "#F0E442", 
+                      darkblue = "#0072B2", 
+                      red = "#D55E00", 
+                      purple = "#CC79A7")
+
+library(tidyverse)
+library(gridExtra)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+### xaringan::inf_mr() -> use this for display within Rstudio
+
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(
+  share_buttons = "none"
+)
+
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
+
+name: plan
+
+## Plan for today
+You can click the following links to navigate through the slides (in the HTML version).
+
+* [Welcome](#welcome)
+* [Goals](#goals)
+* [Case study](#fish)
+* [Breakout 1](#breakout1)
+* [Report back 1](#report1)
+* [10 minute break](#break)
+* [Breakout 2](#breakout2)
+* [Report back 2](#report2)
+* [Closing](#close)
+
+---
+class: middle, center, inverse
+name: welcome
+# Welcome
+
+.header[<u>[Go to plan](#plan)</u>]
+
+---
+class: middle, center, inverse
+name: goals
+# Goals
+
+.header[<u>[Go to plan](#plan)</u>]
+
+---
+class: middle, center, inverse
+name: fish
+background-image: url("images/fmri-salmon.jpeg")
+background-size: contain
+# Case study
+
+.header[<u>[Go to plan](#plan)</u>]
+
+---
+class: middle, center, inverse
+name: breakout1
+# Breakout 1
+
+.header[<u>[Go to plan](#plan)</u>]
+
+---
+class: middle, center, inverse
+name: report1
+# Report back 1
+
+.header[<u>[Go to plan](#plan)</u>]
+
+---
+class: middle, center
+name: break
+background-image: url("images/stretch.jpg")
+# Break time! 10 minutes
+
+.header[<u>[Go to plan](#plan)</u>]
+
+Take a moment to stretch and grab a drink.
+
+.small[Photo by <a href="https://unsplash.com/@arstyy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Austin Neill</a> on <a href="https://unsplash.com/s/photos/stretch?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>]
+  
+
+---
+class: middle, center, inverse
+name: breakout2
+# Breakout 2
+
+.header[<u>[Go to plan](#plan)</u>]
+
+---
+# Instructions
+
+If you are in groups 1:
+
+
+---
+class: middle, center, inverse
+name: report2
+# Report back 2
+
+.header[<u>[Go to plan](#plan)</u>]
+
+---
+
+class: inverse, middle
+
+# Thank you for taking part in this special event!
+
+.header[<u>[Go to plan](#plan)</u>]
+
+```{r eval = FALSE, echo = FALSE}
+
+pagedown::chrome_print("HMBxSTA.html", wait = 10)
+
+```
