@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>HMBxSTA</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="HMB496/499, STA490" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# HMBxSTA
+## Special peer-to-peer consulting event
+### HMB496/499, STA490
+### Nov 5, 2021
+
+---
+
+
+
+
+class: middle, center, inverse
+name: powerpose
+background-image: url("images/powerpose.png")
+background-size: contain
+
+# &lt;span style="background: rgba(0,0,0,0.8); border-radius: 12px; padding: 7px 5px;"&gt;Power Pose Study&lt;/span&gt;
+
+.header[&lt;u&gt;[Go to plan](#plan)&lt;/u&gt;]
+
+---
+## Method
+
+Note: The following sections are reproduced from the original paper.
+
+__Subjects.__ 42 participants (all live) were randomly assigned to the high-power-pose or low-power-pose condition.  
+
+__Task.__ The experimenter placed an electrode on the participants and explained "To test accuracy of physiological responses as a function of sensor placement relative to your heart, you are being put into a certain physical position." The experimenter then manually configured participants' bodies. The participants held the two poses for 1 minute each completing a filler task.
+
+__Measurement.__ Standard salivary-hormone collection procedures were used to collect saliva samples before and after the power-pose task. Testosterone, a hormone that increases dominant behaviours, levels were measured in pg/ml. 
+
+.small[Source: https://faculty.haas.berkeley.edu/dana_carney/power.poses.PS.2010.pdf]
+
+---
+## Method
+
+Note: The following analysis and values have been modified to simplify the case study.
+
+__Analysis.__ A two sample t-test assuming a common variance for both groups was conducted to test whether the _mean difference in testosterone_ among the high-power-pose group was _different_ from that among the low-power-pose group. 
+
+__Result.__ The 0.05 significance level hypothesis test found a significant result of 2.34 pg/ml mean difference (pooled sd: 4.78) in testosterone level.
+
+.small[Source: https://faculty.haas.berkeley.edu/dana_carney/power.poses.PS.2010.pdf]
+
+---
+# Discussion Questions
+
+1. Did the study have enough subjects? What is the minimum number of subjects you would recommend? Discuss any assumptions.
+
+2. If you were to conduct the same experiment again with a larger group of participants, say 250, do you expect to find a statistically significant result again? Explain.
+
+3. Now suppose any difference testosterone level less than 5 pg/ml&lt;sup&gt;&amp;#8224;&lt;/sup&gt; is not sufficient to change one's behaviour or otherwise clinically meaninful. What is the minimum number of subjects under this new assumption? Assume all other assumptions from Q1 hold.
+
+.small[&lt;sup&gt;&amp;#8224;&lt;/sup&gt;This values is an arbitrary value selected for the purpose of the case study.]
+
+
+---
+# Further reading
+
+The original study - _Power posing: Brief nonverbal displays affect neuroendocrine levels and risk tolerance_ by Carney, Cuddy, and Yap. 2010. [LINK](https://faculty.haas.berkeley.edu/dana_carney/power.poses.PS.2010.pdf)
+
+A replication study - _Assessing the robustness of power posing: No effect on hormones and risk tolerance in a large sample of men and women_ by Ranehill et al. 2015. [LINK](https://librarysearch.library.utoronto.ca/permalink/01UTORONTO_INST/fedca1/cdi_proquest_miscellaneous_1680179760)
+
+Carney's updated position "Power poses" [LINK](http://faculty.haas.berkeley.edu/dana_carney/pdf_My%20position%20on%20power%20poses.pdf)
+
+
+---
+## Example answers to question 1
+
+
+
+.small[
+
+.pull-left[
+
+__Assumptions.__ Suppose the researchers wanted at least 80% statistical power to capture a difference of 2 pg/ml or more. That is, they wanted to ensure that if there was in deed a true difference of 2 pg/ml between the two groups then the experiment would detect and conclude a significant difference with a probability of 80%. Futher assume the observed standard deviation is a good estimate for the true standard deviation.
+
+__Power analysis.__ Using at 5% significance level, we can conduct a power analysis to compute the required sample size in R as shown on the right. Based on the result, it's recommended to recruit at least 91 participants per treatment, or 182 in total. 
+
+]
+
+.pull-right[
+
+
+```r
+pwr::pwr.t.test(
+  d = 2/4.78, sig.level = 0.05, 
+  power = 0.8, type = "two.sample")
+```
+
+```
+## 
+##      Two-sample t test power calculation 
+## 
+##               n = 90.63739
+##               d = 0.41841
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group
+```
+
+]
+]
+
+---
+## Example answers to question 2
+
+.small[
+
+.pull-left[
+
+__Short answer.__ A statistically significant result with a small sample does not imply the same conclusion with a larger sample.
+
+__Explanation.__ It's easy to assume that you would find significant results with a larger sample if you found a significant result with a smaller sample. However, a smaller sample also means a larger standard error which increases the likelihood of observing unusual values. That is, the significant result from a smaller sample can be a result of randomness and you may not observe the same result with a larger sample. Simmons, Nelson,, and Simonsohn demonstrated this with a simulation shown on the right.
+
+]
+
+.pull-right[
+
+&lt;img src="images/p-value-vs-sample-size.png" width="80%" /&gt;
+
+.tiny[Figure 2 from False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant by Simmons, Nelson, and Simonsohn. 2011.  https://journals.sagepub.com/doi/full/10.1177/0956797611417632]
+
+]
+]
+
+
+---
+## Example answers to question 3
+
+
+
+.small[
+.pull-left[
+
+We can repeat the calculation using 5 pg/ml instead of 2 pg ml for the desired effect size. The same R function now indicates a minimum sample size of 32. When you expect a bigger difference, it's easier to detect the difference and requires smaller sample to achieve the same statistical power.
+
+]
+
+.pull-right[
+
+
+```r
+pwr::pwr.t.test(
+  d = 5/4.78, sig.level = 0.05, 
+  power = 0.8, type = "two.sample")
+```
+
+```
+## 
+##      Two-sample t test power calculation 
+## 
+##               n = 15.36893
+##               d = 1.046025
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group
+```
+
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
